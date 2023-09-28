@@ -1,0 +1,70 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class GuessingGame {
+    public static void main(String[] args) {
+        Random NumberGenerated = new Random();
+        int Cguess = NumberGenerated.nextInt(100);
+        int NumberTried = 0;
+        int GuessN;
+        int Max_Attempts = 8;
+        int option = 1;
+        int RoundsPlayed = 0;
+        int RoundsWon = 0;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Welcome user! Please enter your name: ");
+        String user = sc.nextLine();
+
+        while (user.length() == 0) {
+            System.out.println("No input found \n");
+            System.out.println("Please enter your name:");
+            user = sc.nextLine();
+        }
+
+        while (option != 0) {
+            System.out.println("Heyy " + user + "! Welcome to the NUMBER GUESSING GAME.");
+            System.out.println("CHALLENGE: Guess the number within 8 attempts");
+            for (int i = 1; i <= Max_Attempts; i++) {
+                System.out.println("Guess a number between 0 and 100:");
+                GuessN = sc.nextInt();
+                NumberTried++;
+                if (GuessN == Cguess) {
+                    System.out.println(
+                            "Amazing!!\n CONGRATULATIONS " + user + "! You have guessed the correct number in " + NumberTried + " attempt(s)");
+                    RoundsWon = RoundsWon+1;
+                    break;
+                }
+                else if (GuessN < Cguess)
+                    System.out.println("Your guess is LESSER than the ORIGINAL NUMBER");
+                else
+                    System.out.println("Your guess is GREATER than the ORIGINAL NUMBER");
+                if (i == Max_Attempts) {
+                    System.out.println("Sorry, " + user + ", you have reached the MAXIMUM ATTEMPTS.\n The correct number was " + Cguess);
+                }
+            }
+            RoundsPlayed = RoundsPlayed + 1;
+
+            System.out.println("Total Rounds Played: "+RoundsPlayed);
+            System.out.println("Total Rounds Won: "+RoundsWon);
+            System.out.println("Do you want to play again??");
+            System.out.println("If yes press Y, if no press N");
+            String a = sc.next();
+            
+            if (a.equals("Y") || a.equals("y")){
+                option = 1;
+            }
+            else if (a.equals("N") || a.equals("n")){
+                option = 0;
+                System.out.println("Thank you for playing");
+                sc.close();
+            }
+            else {
+                option = 0;
+                System.out.println("Not a valid input");
+                sc.close();
+            }
+        }
+        sc.close();
+    }
+}
+
